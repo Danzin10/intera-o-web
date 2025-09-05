@@ -49,7 +49,7 @@ function mostrarCodigoSecreto() {
     const codigoInput = document.createElement("input");
     codigoInput.type = "text";
     codigoInput.id = "codigo";
-    codigoInput.placeholder = "Digite o código aqui";
+    codigoInput.placeholder = "Digite o código de acesso aqui";
     codigoInput.style.marginTop = "10px";
 
     const codigoBtn = document.createElement("button");
