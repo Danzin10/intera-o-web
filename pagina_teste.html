@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Página de Conteúdos</title>
+    <title>Second Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="pagina_teste">
@@ -17,44 +17,41 @@
         <div id="aviso" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="fecharAviso()">&times;</span>
-                <p>Bem-vindo! 🎉<br>
-                Essa página foi criada pensando em você!<br>
-                Aproveite o nosso conteúdo!</p>
+                <p>Bem-vindo! 🎉<br>Essa página foi criada pensando em você!<br>Aproveite o nosso conteúdo!</p>
             </div>
         </div>
 
         <!-- Conteúdos de links -->
-        <div id="conteudos" class="conteudos">
-            <h2>Conteúdos de Desenvolvimento</h2>
+        <div id="conteudos" class="conteudos" style="display:none; margin-top:20px;">
+            <h2>Plataformas e Cursos</h2>
             <ul>
-                <li>
-                    <a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" title="Curso introdutório de Python">Python - Introdução (YouTube)</a>
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/watch?v=upDLs1sn7g4" target="_blank" title="Curso introdutório de JavaScript">JavaScript - Introdução (YouTube)</a>
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/watch?v=UB1O30fR-EE" target="_blank" title="Curso de HTML & CSS">HTML & CSS - Introdução (YouTube)</a>
-                </li>
-
-                <div class="separador"></div>
-
-                <li>
-                    <a href="https://www.udemy.com/course/the-complete-web-developer-bootcamp/" target="_blank" title="Curso completo de desenvolvimento web">Udemy - Fullstack</a>
-                </li>
-                <li>
-                    <a href="https://www.alura.com.br/cursos-online-front-end" target="_blank" title="Cursos de Frontend e Backend">Alura - Cursos Front/Back</a>
-                </li>
-                <li>
-                    <a href="https://www.codecademy.com/catalog" target="_blank" title="Plataforma interativa de programação">Codecademy - Cursos interativos</a>
-                </li>
+                <li><a href="https://www.udemy.com" target="_blank" title="Cursos variados de programação">Udemy</a></li>
+                <li><a href="https://www.alura.com.br" target="_blank" title="Cursos completos de desenvolvimento">Alura</a></li>
+                <li><a href="https://www.coursera.org" target="_blank" title="Cursos de programação do básico ao avançado">Coursera</a></li>
+                <li><a href="https://www.youtube.com/@freecodecamp" target="_blank" title="Aulas gratuitas de programação">YouTube: freeCodeCamp</a></li>
             </ul>
 
-            <div class="separador"></div>
+            <h2>Redes Sociais</h2>
+            <p>Para mais informações: <a href="https://www.instagram.com/daniellucass_06" target="_blank">@daniellucass_06</a></p>
 
-            <div class="instagram">
-                Para mais informações, siga meu Instagram: 
-                <a href="https://www.instagram.com/daniellucass_06" target="_blank">@daniellucass_06</a>
+            <h2>Curiosidades de Programação</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Curiosidade 1</h3>
+                    <p>O JavaScript foi criado em apenas 10 dias e é a linguagem mais usada na web.</p>
+                </div>
+                <div class="card">
+                    <h3>Curiosidade 2</h3>
+                    <p>Python é a linguagem preferida para inteligência artificial e análise de dados.</p>
+                </div>
+                <div class="card">
+                    <h3>Curiosidade 3</h3>
+                    <p>HTML e CSS não são linguagens de programação, mas essenciais para qualquer site moderno.</p>
+                </div>
+                <div class="card">
+                    <h3>Curiosidade 4</h3>
+                    <p>Git permite que você gerencie versões de projetos e colabore com outros desenvolvedores facilmente.</p>
+                </div>
             </div>
         </div>
     </div>

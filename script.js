@@ -195,3 +195,20 @@ function iniciarParticulas() {
     draw();
     window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 }
+
+// Detecta quando os cards entram na tela e adiciona a classe 'visible'
+function animarCards() {
+    const cards = document.querySelectorAll('.card');
+    const windowHeight = window.innerHeight;
+
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if(cardTop < windowHeight - 50) { // quando estiver próximo de entrar
+            card.classList.add('visible');
+        }
+    });
+}
+
+// Executa ao carregar a página e ao rolar
+window.addEventListener('load', animarCards);
+window.addEventListener('scroll', animarCards);
