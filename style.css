@@ -331,3 +331,28 @@ h1.animado {
     opacity: 1;
     transform: translateY(0);
 }
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background: linear-gradient(135deg, #330000, #990000);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(255,0,0,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+  width: 200px;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,0,0,0.7);
+}

@@ -89,38 +89,28 @@ function fecharErro() {
     if (erroDiv) erroDiv.style.display = "none";
 }
 
-/* ===== Segunda Página ===== */
+/* ===== Segunda Página Integrada ===== */
+
 window.onload = function() {
     const modal = document.getElementById("aviso");
     if(modal) modal.classList.add("show");
 };
 
+// Fecha o modal e mostra conteúdos com efeitos
 function fecharAviso() {
     const modal = document.getElementById("aviso");
     const conteudos = document.getElementById("conteudos");
 
-    // Mostra os links
+    if(modal) modal.style.display = "none"; // agora desaparece de vez
+
     if(conteudos) {
         conteudos.style.display = "block";
         setTimeout(() => conteudos.classList.add("show"), 50);
     }
 
-    // Adiciona efeito de sumir para o modal
-    if(modal) {
-        modal.style.transition = "opacity 0.5s ease";
-        modal.style.opacity = 0;
-
-        // Remove completamente após a animação
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 500);
-    }
-
-    // Inicia confetes e partículas
     iniciarConfete();
     iniciarParticulas();
 }
-
 
 /* ===== Confete ===== */
 function iniciarConfete() {
@@ -196,19 +186,52 @@ function iniciarParticulas() {
     window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 }
 
-// Detecta quando os cards entram na tela e adiciona a classe 'visible'
-function animarCards() {
-    const cards = document.querySelectorAll('.card');
-    const windowHeight = window.innerHeight;
+/* ===== Cursos e Cards ===== */
+const cursosYoutube = [
+    { nome: "Curso Python Guanabara", link: "https://youtu.be/S9uPNppGsGo?si=KACQB6C2WnQJnZOw" },
+    { nome: "Curso JavaScript Moderno", link: "https://youtu.be/1-w1RfGIov4?si=y13W7i7YXRlywgB0" },
+    { nome: "Curso HTML e CSS", link: "https://youtu.be/Ejkb_YpuHWs?si=q8R6bZoIcXvbgB4e" },
+    { nome: "Curso React Iniciante", link: "https://youtu.be/FXqX7oof0I4?si=4DVyWL_HEGECNYoh" },
+    { nome: "Curso Node.js Backend", link: "https://youtu.be/hHM-hr9q4mo?si=gHSFrhVnEnd5TJ5B" },
+    { nome: "Curso Python Iniciante", link: "https://youtu.be/S9uPNppGsGo?si=Y6uithvV3mPiP103" },
+    { nome: "Curso JavaScript Elogiado", link: "https://youtu.be/Ptbk2af68e8?si=mVqBSJMXldVBlKA9" },
+    { nome: "Curso HTML/CSS Avançado", link: "https://youtu.be/pXAGoP2G2vE?si=0PNEO7fekfQWkZ_d" },
+    { nome: "Curso React Avançado", link: "https://youtu.be/n23-oo_93RM?si=LxWWe55r1G7kd1pa" },
+];
 
-    cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        if(cardTop < windowHeight - 50) { // quando estiver próximo de entrar
-            card.classList.add('visible');
-        }
-    });
+const curiosidades = [
+    "O JavaScript foi criado em apenas 10 dias!",
+    "Python é usado em IA, web e ciência de dados.",
+    "HTML significa HyperText Markup Language.",
+    "React foi criado pelo Facebook em 2013.",
+    "Git é essencial para versionamento de código."
+];
+
+function carregarCursosECards() {
+    const listaCursos = document.getElementById("lista-cursos");
+    const containerCards = document.getElementById("container-cards");
+
+    if(listaCursos){
+        cursosYoutube.forEach(curso => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = curso.link;
+            a.target = "_blank";
+            a.textContent = curso.nome;
+            li.appendChild(a);
+            listaCursos.appendChild(li);
+        });
+    }
+
+    if(containerCards){
+        curiosidades.forEach(texto => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.textContent = texto;
+            containerCards.appendChild(card);
+        });
+    }
 }
 
-// Executa ao carregar a página e ao rolar
-window.addEventListener('load', animarCards);
-window.addEventListener('scroll', animarCards);
+// chama função ao carregar links
+window.addEventListener("load", carregarCursosECards);
