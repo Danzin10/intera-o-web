@@ -314,12 +314,13 @@ h1.animado {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 10px 30px rgba(255,0,0,0.8), 0 0 25px rgba(255,50,50,0.5) inset;
 }
+
 /* Título da seção de cards */
 .titulo-cards {
     font-size: 1.8em;
     color: #ff4d4d;
     text-shadow: 0 0 8px #ff0000, 0 0 15px rgba(255,50,50,0.6);
-    margin-top: 30px;
+    margin-top: 25px;
     margin-bottom: 15px;
     text-align: center;
     letter-spacing: 1px;
