@@ -46,16 +46,6 @@
         </div>
     </div>
 
-    <script>
-        // Puxando o nome do localStorage da primeira página
-        window.addEventListener("load", () => {
-            const nomeUsuario = localStorage.getItem("nomeUsuario");
-            if (nomeUsuario) {
-                const mensagem = document.getElementById("mensagem-bem-vindo");
-                mensagem.textContent = `Olá, ${nomeUsuario}! Aproveite nossos cursos e conteúdos exclusivos 🚀`;
-            }
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>

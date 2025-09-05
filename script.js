@@ -108,165 +108,17 @@ function saudar() {
 }
 
 /* ===== Segunda Página ===== */
-window.onload = function() {
-    const modal = document.getElementById("aviso");
-    if(modal) modal.classList.add("show");
-};
+window.addEventListener("load", () => {
+    // Pega o nome do usuário salvo na primeira página
+    const nomeUsuario = localStorage.getItem("nomeUsuario");
+    const mensagemBoasVindas = document.getElementById("mensagem-bem-vindo");
+
+    if (nomeUsuario && mensagemBoasVindas) {
+        mensagemBoasVindas.textContent = `Olá, ${nomeUsuario}! Confira os links abaixo:`;
+    }
+});
 
 // Fecha o modal e exibe conteúdos
-function fecharAviso() {
-    const modal = document.getElementById("aviso");
-    const conteudos = document.getElementById("conteudos");
-
-    if(modal) modal.style.display = "none";
-
-    if(conteudos){
-        conteudos.style.display = "block";
-        setTimeout(() => conteudos.classList.add("show"), 50);
-        carregarCursosECards(); // carrega links e cards
-    }
-
-    iniciarConfete();
-    iniciarParticulas();
-}
-
-/* ===== Confete ===== */
-function iniciarConfete() {
-    const canvas = document.getElementById("confete");
-    if(!canvas) return;
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const confetes = [];
-    for(let i=0;i<100;i++){
-        confetes.push({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height - canvas.height,
-            r: Math.random()*6+4,
-            d: Math.random()*10+5,
-            color: `hsl(${Math.random()*360},100%,50%)`,
-            tilt: Math.random()*10-5
-        });
-    }
-
-    function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        confetes.forEach(c=>{
-            ctx.beginPath();
-            ctx.fillStyle = c.color;
-            ctx.fillRect(c.x+c.tilt, c.y, c.r, c.r*0.4);
-            c.y += c.d;
-            c.tilt += Math.random()*0.5-0.25;
-            if(c.y>canvas.height){
-                c.y=-10;
-                c.x=Math.random()*canvas.width;
-            }
-        });
-        requestAnimationFrame(draw);
-    }
-    draw();
-    window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
-}
-
-/* ===== Partículas ===== */
-function iniciarParticulas() {
-    const canvas = document.getElementById("particulas");
-    if(!canvas) return;
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particulas = [];
-    for(let i=0;i<50;i++){
-        particulas.push({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            r: Math.random()*3+1,
-            d: Math.random()*2+0.5,
-            color: "rgba(255,255,255,0.2)"
-        });
-    }
-
-    function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particulas.forEach(p=>{
-            ctx.beginPath();
-            ctx.fillStyle = p.color;
-            ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-            ctx.fill();
-            p.y += p.d;
-            if(p.y>canvas.height){ p.y=-10; p.x=Math.random()*canvas.width; }
-        });
-        requestAnimationFrame(draw);
-    }
-    draw();
-    window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
-}
-
-/* ===== Cursos e Cards ===== */
-const cursosYoutube = [
-    { nome: "Curso Python Guanabara", link: "https://youtu.be/S9uPNppGsGo?si=KACQB6C2WnQJnZOw" },
-    { nome: "Curso JavaScript Moderno", link: "https://youtu.be/1-w1RfGIov4?si=y13W7i7YXRlywgB0" },
-    { nome: "Curso HTML e CSS", link: "https://youtu.be/Ejkb_YpuHWs?si=q8R6bZoIcXvbgB4e" },
-    { nome: "Curso React Iniciante", link: "https://youtu.be/FXqX7oof0I4?si=4DVyWL_HEGECNYoh" },
-    { nome: "Curso Node.js Backend", link: "https://youtu.be/hHM-hr9q4mo?si=gHSFrhVnEnd5TJ5B" },
-    { nome: "Curso Python Iniciante", link: "https://youtu.be/S9uPNppGsGo?si=Y6uithvV3mPiP103" },
-    { nome: "Curso JavaScript Elogiado", link: "https://youtu.be/Ptbk2af68e8?si=mVqBSJMXldVBlKA9" },
-    { nome: "Curso HTML/CSS Avançado", link: "https://youtu.be/pXAGoP2G2vE?si=0PNEO7fekfQWkZ_d" },
-    { nome: "Curso React Avançado", link: "https://youtu.be/n23-oo_93RM?si=LxWWe55r1G7kd1pa" }
-];
-
-const curiosidades = [
-    "O JavaScript foi criado em apenas 10 dias!",
-    "Python é usado em IA, web e ciência de dados.",
-    "HTML significa HyperText Markup Language.",
-    "React foi criado pelo Facebook em 2013.",
-    "Git é essencial para versionamento de código.",
-    "O primeiro computador eletrônico foi criado em 1943 e ocupava uma sala inteira!",
-    "Python é uma das linguagens mais usadas em IA e machine learning.",
-    "O Git foi criado por Linus Torvalds em 2005 para gerenciar o Linux.",
-    "HTML5 introduziu elementos semânticos como <header>, <footer> e <article>.",
-    "O primeiro bug de computador registrado foi uma mariposa presa em um relé.",
-    "Existem linguagens de programação que só existem como piadas, como Brainfuck e Whitespace."
-];
-
-/* Função para carregar links e cards */
-function carregarCursosECards() {
-    const listaCursos = document.getElementById("lista-cursos");
-    const containerCards = document.getElementById("container-cards");
-
-    if(listaCursos){
-        listaCursos.innerHTML = ""; // limpa antes de adicionar
-        cursosYoutube.forEach(curso => {
-            const li = document.createElement("li");
-            const a = document.createElement("a");
-            a.href = curso.link;
-            a.target = "_blank";
-            a.textContent = curso.nome;
-            li.appendChild(a);
-            listaCursos.appendChild(li);
-        });
-    }
-
-    if(containerCards){
-        containerCards.innerHTML = ""; // limpa antes de adicionar
-        curiosidades.forEach(texto => {
-            const card = document.createElement("div");
-            card.className = "card-curiosidade"; // usa a classe do CSS
-            card.innerHTML = `<p>${texto}</p>`;
-            containerCards.appendChild(card);
-        });
-
-        // Animação fade-in em cascata
-        const cards = containerCards.querySelectorAll(".card-curiosidade");
-        cards.forEach((card, i) => {
-            setTimeout(() => card.classList.add("visible"), i * 150);
-        });
-    }
-}
-
-/* Chama a função quando o modal for fechado */
 function fecharAviso() {
     const modal = document.getElementById("aviso");
     const conteudos = document.getElementById("conteudos");
@@ -284,23 +136,62 @@ function fecharAviso() {
     iniciarConfete();
     iniciarParticulas();
 }
-// Pega o nome do usuário salvo na primeira página
-const nomeUsuario = localStorage.getItem("nomeUsuario");
 
-// Seleciona o container dos conteúdos
-const conteudos = document.getElementById("conteudos");
+/* ===== Cursos e Cards ===== */
+function carregarCursosECards() {
+    const listaCursos = document.getElementById("lista-cursos");
+    const containerCards = document.getElementById("container-cards");
 
-// Mensagem de boas-vindas personalizada
-if(nomeUsuario) {
-    const mensagemBoasVindas = document.createElement("p");
-    mensagemBoasVindas.style.marginTop = "15px";
-    mensagemBoasVindas.style.fontWeight = "bold";
-    mensagemBoasVindas.style.fontSize = "1.2em";
-    mensagemBoasVindas.style.color = "#ffcccc";
-    mensagemBoasVindas.style.textShadow = "0 0 6px #ff1a1a";
-    mensagemBoasVindas.innerText = `Olá, ${nomeUsuario}! Confira os links abaixo:`;
-    
-    // Insere a mensagem logo abaixo do título principal
-    const titulo = document.querySelector(".animado");
-    titulo.insertAdjacentElement("afterend", mensagemBoasVindas);
+    const cursosYoutube = [
+        { nome: "Curso Python Guanabara", link: "https://youtu.be/S9uPNppGsGo?si=KACQB6C2WnQJnZOw" },
+        { nome: "Curso JavaScript Moderno", link: "https://youtu.be/1-w1RfGIov4?si=y13W7i7YXRlywgB0" },
+        { nome: "Curso HTML e CSS", link: "https://youtu.be/Ejkb_YpuHWs?si=q8R6bZoIcXvbgB4e" },
+        { nome: "Curso React Iniciante", link: "https://youtu.be/FXqX7oof0I4?si=4DVyWL_HEGECNYoh" },
+        { nome: "Curso Node.js Backend", link: "https://youtu.be/hHM-hr9q4mo?si=gHSFrhVnEnd5TJ5B" },
+        { nome: "Curso Python Iniciante", link: "https://youtu.be/S9uPNppGsGo?si=Y6uithvV3mPiP103" },
+        { nome: "Curso JavaScript Elogiado", link: "https://youtu.be/Ptbk2af68e8?si=mVqBSJMXldVBlKA9" },
+        { nome: "Curso HTML/CSS Avançado", link: "https://youtu.be/pXAGoP2G2vE?si=0PNEO7fekfQWkZ_d" },
+        { nome: "Curso React Avançado", link: "https://youtu.be/n23-oo_93RM?si=LxWWe55r1G7kd1pa" }
+    ];
+
+    const curiosidades = [
+        "O JavaScript foi criado em apenas 10 dias!",
+        "Python é usado em IA, web e ciência de dados.",
+        "HTML significa HyperText Markup Language.",
+        "React foi criado pelo Facebook em 2013.",
+        "Git é essencial para versionamento de código.",
+        "O primeiro computador eletrônico foi criado em 1943 e ocupava uma sala inteira!",
+        "Python é uma das linguagens mais usadas em IA e machine learning.",
+        "O Git foi criado por Linus Torvalds em 2005 para gerenciar o Linux.",
+        "HTML5 introduziu elementos semânticos como <header>, <footer> e <article>.",
+        "O primeiro bug de computador registrado foi uma mariposa presa em um relé.",
+        "Existem linguagens de programação que só existem como piadas, como Brainfuck e Whitespace."
+    ];
+
+    if(listaCursos){
+        listaCursos.innerHTML = "";
+        cursosYoutube.forEach(curso => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = curso.link;
+            a.target = "_blank";
+            a.textContent = curso.nome;
+            li.appendChild(a);
+            listaCursos.appendChild(li);
+        });
+    }
+
+    if(containerCards){
+        containerCards.innerHTML = "";
+        curiosidades.forEach(texto => {
+            const card = document.createElement("div");
+            card.className = "card-curiosidade";
+            card.innerHTML = `<p>${texto}</p>`;
+            containerCards.appendChild(card);
+        });
+
+        // Animação fade-in em cascata
+        const cards = containerCards.querySelectorAll(".card-curiosidade");
+        cards.forEach((card, i) => setTimeout(() => card.classList.add("visible"), i * 150));
+    }
 }
