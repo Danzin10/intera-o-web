@@ -199,16 +199,21 @@ const curiosidades = [
     "HTML significa HyperText Markup Language.",
     "React foi criado pelo Facebook em 2013.",
     "Git é essencial para versionamento de código.",
+    "O primeiro computador eletrônico foi criado em 1943 e ocupava uma sala inteira!",
+    "Python é uma das linguagens mais usadas em IA e machine learning.",
+    "O Git foi criado por Linus Torvalds em 2005 para gerenciar o Linux.",
+    "HTML5 introduziu elementos semânticos como <header>, <footer> e <article>.",
     "O primeiro bug de computador registrado foi uma mariposa presa em um relé.",
     "Existem linguagens de programação que só existem como piadas, como Brainfuck e Whitespace."
 ];
 
+/* Função para carregar links e cards */
 function carregarCursosECards() {
     const listaCursos = document.getElementById("lista-cursos");
     const containerCards = document.getElementById("container-cards");
 
     if(listaCursos){
-        listaCursos.innerHTML = "";
+        listaCursos.innerHTML = ""; // limpa antes de adicionar
         cursosYoutube.forEach(curso => {
             const li = document.createElement("li");
             const a = document.createElement("a");
@@ -221,22 +226,37 @@ function carregarCursosECards() {
     }
 
     if(containerCards){
-        containerCards.innerHTML = "";
+        containerCards.innerHTML = ""; // limpa antes de adicionar
         curiosidades.forEach(texto => {
             const card = document.createElement("div");
-            card.className = "card-curiosidade";
+            card.className = "card-curiosidade"; // usa a classe do CSS
             card.innerHTML = `<p>${texto}</p>`;
             containerCards.appendChild(card);
+        });
 
-            // Animação futurista hover
-            card.addEventListener("mouseover", () => {
-                card.style.transform = "scale(1.05) rotateY(5deg)";
-                card.style.boxShadow = "0 10px 30px rgba(255,0,0,0.6), 0 0 20px rgba(255,50,50,0.3) inset";
-            });
-            card.addEventListener("mouseout", () => {
-                card.style.transform = "scale(1) rotateY(0deg)";
-                card.style.boxShadow = "0 5px 15px rgba(255,0,0,0.4)";
-            });
+        // Animação fade-in em cascata
+        const cards = containerCards.querySelectorAll(".card-curiosidade");
+        cards.forEach((card, i) => {
+            setTimeout(() => card.classList.add("visible"), i * 150);
         });
     }
+}
+
+/* Chama a função quando o modal for fechado */
+function fecharAviso() {
+    const modal = document.getElementById("aviso");
+    const conteudos = document.getElementById("conteudos");
+
+    if(modal) modal.style.display = "none";
+
+    if(conteudos){
+        conteudos.style.display = "block";
+        setTimeout(() => {
+            conteudos.classList.add("show");
+            carregarCursosECards(); // cria links e cards
+        }, 50);
+    }
+
+    iniciarConfete();
+    iniciarParticulas();
 }
