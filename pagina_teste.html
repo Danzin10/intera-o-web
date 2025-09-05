@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Second Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="pagina_teste">
+    <!-- Canvas de partículas e confete -->
+    <canvas id="particulas"></canvas>
+    <canvas id="confete"></canvas>
+
+    <div class="container">
+        <h1 class="animado">Bem-vindo à nossa página!</h1>
+
+        <!-- Modal -->
+        <div id="aviso" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="fecharAviso()">&times;</span>
+                <p>Bem-vindo! 🎉<br>Essa página foi criada pensando em você!<br>Aproveite o nosso conteúdo!</p>
+            </div>
+        </div>
+
+        <!-- Conteúdos de links -->
+        <div id="conteudos" class="conteudos" style="display:none; margin-top:20px;">
+            <h2>Conteúdos de Desenvolvimento</h2>
+            <ul>
+                <li><a href="https://www.python.org" target="_blank" title="Aprenda Python no site oficial">Python</a></li>
+                <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank" title="Guia completo de JavaScript">JavaScript</a></li>
+                <li><a href="https://www.w3schools.com" target="_blank" title="Tutoriais de HTML & CSS">HTML & CSS</a></li>
+                <li><a href="https://git-scm.com" target="_blank" title="Aprenda Git">Git</a> | 
+                    <a href="https://github.com" target="_blank" title="Explore projetos no GitHub">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
