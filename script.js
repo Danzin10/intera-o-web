@@ -82,6 +82,30 @@ function fecharErro() {
     const erroDiv = document.getElementById("erro-codigo");
     if (erroDiv) erroDiv.style.display = "none";
 }
+function saudar() {
+    const nome = document.getElementById("nome").value.trim();
+    const mensagem = document.getElementById("mensagem");
+    const idadeContainer = document.getElementById("idade-container");
+
+    mensagem.classList.remove("erro", "sucesso");
+
+    if (nome) {
+        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à página de teste 🚀`;
+        mensagem.classList.add("sucesso");
+
+        // SALVA NO LOCALSTORAGE
+        localStorage.setItem("nomeUsuario", nome);
+
+        idadeContainer.style.display = "block";
+        idadeContainer.style.opacity = 0;
+        idadeContainer.style.transition = "opacity 0.5s";
+        setTimeout(() => idadeContainer.style.opacity = 1, 50);
+    } else {
+        mensagem.textContent = "Por favor, digite um nome!";
+        mensagem.classList.add("erro");
+        idadeContainer.style.display = "none";
+    }
+}
 
 /* ===== Segunda Página ===== */
 window.onload = function() {
