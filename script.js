@@ -99,17 +99,28 @@ function fecharAviso() {
     const modal = document.getElementById("aviso");
     const conteudos = document.getElementById("conteudos");
 
-    if(modal) modal.classList.remove("show");
+    // Mostra os links
+    if(conteudos) {
+        conteudos.style.display = "block";
+        setTimeout(() => conteudos.classList.add("show"), 50);
+    }
 
-    setTimeout(() => {
-        if(conteudos) {
-            conteudos.style.display = "block";
-            setTimeout(() => conteudos.classList.add("show"), 50);
-        }
-        iniciarConfete();
-        iniciarParticulas();
-    }, 400);
+    // Adiciona efeito de sumir para o modal
+    if(modal) {
+        modal.style.transition = "opacity 0.5s ease";
+        modal.style.opacity = 0;
+
+        // Remove completamente após a animação
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 500);
+    }
+
+    // Inicia confetes e partículas
+    iniciarConfete();
+    iniciarParticulas();
 }
+
 
 /* ===== Confete ===== */
 function iniciarConfete() {
