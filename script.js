@@ -90,7 +90,7 @@ function saudar() {
     mensagem.classList.remove("erro", "sucesso");
 
     if (nome) {
-        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à página de teste 🚀`;
+        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa página de conteúdos 🚀`;
         mensagem.classList.add("sucesso");
 
         // SALVA NO LOCALSTORAGE
