@@ -260,3 +260,23 @@ function fecharAviso() {
     iniciarConfete();
     iniciarParticulas();
 }
+// Pega o nome do usuário salvo na primeira página
+const nomeUsuario = localStorage.getItem("nomeUsuario");
+
+// Seleciona o container dos conteúdos
+const conteudos = document.getElementById("conteudos");
+
+// Mensagem de boas-vindas personalizada
+if(nomeUsuario) {
+    const mensagemBoasVindas = document.createElement("p");
+    mensagemBoasVindas.style.marginTop = "15px";
+    mensagemBoasVindas.style.fontWeight = "bold";
+    mensagemBoasVindas.style.fontSize = "1.2em";
+    mensagemBoasVindas.style.color = "#ffcccc";
+    mensagemBoasVindas.style.textShadow = "0 0 6px #ff1a1a";
+    mensagemBoasVindas.innerText = `Olá, ${nomeUsuario}! Confira os links abaixo:`;
+    
+    // Insere a mensagem logo abaixo do título principal
+    const titulo = document.querySelector(".animado");
+    titulo.insertAdjacentElement("afterend", mensagemBoasVindas);
+}

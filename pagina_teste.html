@@ -23,6 +23,10 @@
 
         <!-- Conteúdos de links -->
         <div id="conteudos" class="conteudos" style="display:none; margin-top:20px;">
+
+            <!-- Mensagem de boas-vindas personalizada -->
+            <p id="mensagem-bem-vindo" style="font-size:1.2em; margin-bottom:15px; color:#ffcccc; text-shadow:0 0 6px #ff1a1a;"></p>
+
             <h2>Cursos e aulas de Desenvolvimento</h2>
 
             <!-- Lista de cursos YouTube e plataformas -->
@@ -42,6 +46,16 @@
         </div>
     </div>
 
+    <script>
+        // Puxando o nome do localStorage da primeira página
+        window.addEventListener("load", () => {
+            const nomeUsuario = localStorage.getItem("nomeUsuario");
+            if (nomeUsuario) {
+                const mensagem = document.getElementById("mensagem-bem-vindo");
+                mensagem.textContent = `Olá, ${nomeUsuario}! Aproveite nossos cursos e conteúdos exclusivos 🚀`;
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
