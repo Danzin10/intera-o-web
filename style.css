@@ -88,57 +88,54 @@ button.btn:hover {
 .sucesso { color: #28a745; }
 .erro { color: #ff7f7f; }
 
-/* ===== Segunda Página - Container Futurista ===== */
-body.pagina_teste .container {
-    background: linear-gradient(135deg, rgba(104, 20, 20,0.9), rgba(200, 30, 30,0.85));
-    padding: 40px 30px; /* mais espaço interno para não cortar texto */
-    border-radius: 16px;
-    box-shadow: 0 15px 50px rgba(255,0,0,0.6), 0 0 25px rgba(255,50,50,0.4) inset;
+/* ===== Segunda Página Futurista Ajustada ===== */
+body.pagina_teste {
+    font-family: Arial, sans-serif;
+    background: url('imagens/Imageteste.png') no-repeat center top fixed;
+    background-size: cover;  /* cobre toda a tela */
+    margin: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* título no topo */
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #000; /* garante que não apareçam bordas brancas */
+}
+
+/* Canvas de partículas e confete */
+#particulas, #confete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Título centralizado e vermelho */
+h1.animado {
+    margin-top: 50px;
+    color: #ff1a1a; /* vermelho intenso */
     text-align: center;
-    width: 420px;
-    max-height: 90vh; /* evita overflow */
-    overflow-y: auto; /* rolagem se conteúdo for maior */
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    transform: translateY(-30px) rotateX(10deg) scale(0.95);
-    animation: fadeIn3D 1s forwards 0.5s;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 2.5em;
+    text-shadow: 0 0 15px #ff0000;
 }
 
-
-body.pagina_teste .container:hover {
-    transform: translateY(0) rotateX(0) scale(1);
-    box-shadow: 0 20px 60px rgba(255,0,0,0.8), 0 0 35px rgba(255,50,50,0.5) inset;
-}
-
-/* Conteúdos internos */
-.conteudos {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    display: none;
-    margin-top: 25px;
-    background-color: rgba(0,0,0,0.45); /* mais contraste com gradiente */
-    padding: 25px; /* mais espaço interno */
-    border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-    position: relative;
-    z-index: 5;
-    max-height: 60vh;
-    overflow-y: auto;
-}
-
+/* Modal de aviso */
 .modal-content {
-    background: linear-gradient(135deg, rgba(219,26,26,0.95), rgba(180,10,10,0.9));
-    margin: 10% auto; /* mais espaço no topo */
-    padding: 25px 25px 40px 25px; /* espaço inferior maior */
+    background: linear-gradient(135deg, rgba(150,0,0,0.95), rgba(200,0,0,0.9));
+    margin: 10% auto;
+    padding: 25px 25px 40px 25px;
     border-radius: 14px;
     width: 85%;
     max-width: 420px;
     text-align: center;
     position: relative;
-    color: #f8f6f6;
-    border: 2px solid #f7f6f6;
+    color: #fff;
+    border: 2px solid #ff0000;
     transform: scale(0.7);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 10px 35px rgba(255,0,0,0.5), 0 0 15px rgba(255,50,50,0.3) inset;
@@ -159,101 +156,70 @@ body.pagina_teste .container:hover {
 
 .close:hover { color: #ff4500; }
 
-/* Mostrar conteúdos */
-.conteudos.show { 
-    opacity: 1; 
-    display: block; 
-}
-
-/* Links de conteúdo */
-.conteudos a {
-    color: #ffd700; /* dourado brilhante */
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s;
-    text-shadow: 0 0 8px #ff4500; /* brilho para destaque */
-    font-weight: bold;
-}
-
-.conteudos a:hover {
-    color: #ff4500;
-    transform: scale(1.08) translateZ(5px);
-    text-shadow: 0 0 12px #ff0000, 0 0 8px #ffd700;
-}
-
-
-
-/* Tooltip animado */
-.conteudos a[title]:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 140%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.85);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 6px;
-    white-space: nowrap;
-    font-size: 0.8em;
-    opacity: 1;
-    pointer-events: none;
-    transition: opacity 0.3s ease, bottom 0.3s ease;
-}
-
-
-/* Canvas de partículas e confete */
-#particulas, #confete {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-}
-
-/* Responsividade simples */
-@media screen and (max-width: 500px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
-}
-
-/* Balão de erro código secreto */
-.erro-codigo {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #ff0000, #b30000);
-    color: #fff;
-    padding: 20px 30px;
+/* Links futuristas dentro da página */
+.conteudos {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    padding: 30px;
+    background: rgba(0,0,0,0.8);
     border-radius: 12px;
-    box-shadow: 0 0 25px #ff0000, 0 0 50px rgba(255,0,0,0.5) inset;
+    box-shadow: 0 0 25px rgba(255,0,0,0.5);
+    z-index: 5;
+    max-width: 600px;
+    width: 90%;
+}
+
+.link-futurista {
+    display: block;
+    color: #ff4d4d;
     font-weight: bold;
     font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    z-index: 9999;
-    animation: balaoErro 0.4s ease;
+    margin: 12px 0;
+    text-decoration: none;
+    text-shadow: 0 0 8px #ff0000;
+    transition: all 0.3s;
 }
 
-@keyframes balaoErro {
-    0% { transform: translate(-50%, -30px) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
+.link-futurista:hover {
+    color: #ff1a1a;
+    text-shadow: 0 0 15px #ff1a1a, 0 0 10px #ff4d4d;
+    transform: scale(1.05);
 }
 
-.close-erro {
-    margin-left: 15px;
-    color: #ff00ff;
-    font-size: 28px;
-    cursor: pointer;
-    text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff0000;
-    transition: transform 0.2s;
+/* Rodapé Instagram */
+.rodape {
+    margin-top: 40px;
+    color: #ff9999;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
 }
 
-.close-erro:hover {
-    transform: scale(1.2);
+.rodape a {
+    color: #ff1a1a;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    text-shadow: 0 0 8px #ff0000;
+}
+
+.rodape a:hover {
+    color: #ff4d4d;
+    text-shadow: 0 0 12px #ff4500, 0 0 8px #ff9999;
+}
+
+/* Responsividade */
+@media screen and (max-width: 500px) {
+    h1.animado {
+        font-size: 2em;
+        margin-top: 30px;
+    }
+    .conteudos {
+        padding: 20px;
+    }
+    .link-futurista {
+        font-size: 1em;
+    }
 }
