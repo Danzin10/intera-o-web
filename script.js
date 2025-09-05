@@ -7,7 +7,7 @@ function saudar() {
     mensagem.classList.remove("erro", "sucesso");
 
     if (nome) {
-        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à página de teste 🚀`;
+        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa Página de Conteúdos  🚀`;
         mensagem.classList.add("sucesso");
 
         idadeContainer.style.display = "block";
