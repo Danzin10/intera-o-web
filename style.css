@@ -96,7 +96,7 @@ body.pagina_teste {
     color: #fff;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* título no topo */
+    align-items: flex-start;
     padding-top: 50px;
     height: 100vh;
     margin: 0;
@@ -281,6 +281,7 @@ h1.animado {
     }
 }
 
+/* ===== CARDS DE CURIOSIDADES ===== */
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -289,70 +290,27 @@ h1.animado {
     margin-top: 20px;
 }
 
-.card {
-    background: linear-gradient(135deg, rgba(50,0,0,0.9), rgba(150,0,0,0.8));
-    border: 2px solid #ff0000;
+.card-curiosidade {
+    background: linear-gradient(145deg, #220000, #550000);
+    color: #ffd700;
+    padding: 15px 20px;
     border-radius: 12px;
-    padding: 20px;
-    width: 250px;
-    color: #fff;
+    box-shadow: 0 5px 20px rgba(255,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s, transform 0.6s;
+    max-width: 250px;
     text-align: center;
-    box-shadow: 0 0 15px rgba(255,0,0,0.6), 0 0 30px rgba(255,50,50,0.4) inset;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.95em;
+    opacity: 0;
+    transform: translateY(20px);
     cursor: default;
 }
 
-.card h3 {
-    margin-bottom: 10px;
-    color: #ff4040;
-    text-shadow: 0 0 8px #ff0000;
-}
-
-.card p {
-    font-size: 0.95em;
-    line-height: 1.4;
-    color: #ffd6d6;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 25px #ff0000, 0 0 40px #ff4500 inset;
-}
-
-/* Animação fade-in para os cards */
-.card {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* Classe ativa quando o card aparece na tela */
-.card.visible {
+.card-curiosidade.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.card {
-  background: linear-gradient(135deg, #330000, #990000);
-  color: #fff;
-  padding: 15px 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(255,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor: default;
-  width: 200px;
-  text-align: center;
-}
-
-.card:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,0,0,0.7);
+.card-curiosidade:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255,0,0,0.8), 0 0 25px rgba(255,50,50,0.5) inset;
 }

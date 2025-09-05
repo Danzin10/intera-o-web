@@ -26,7 +26,6 @@ function verificarIdade(maior) {
     mensagem.classList.remove("erro", "sucesso");
 
     if (maior) {
-        // Mostrar input de código secreto
         mostrarCodigoSecreto();
     } else {
         mensagem.textContent = "Sentimos muito, mas essa página não é pra você ❌";
@@ -41,11 +40,9 @@ function mostrarCodigoSecreto() {
     mensagem.textContent = "Digite o código de acesso para continuar:";
     mensagem.classList.add("sucesso");
 
-    // Esconde os botões anteriores
     const idadeContainer = document.getElementById("idade-container");
     idadeContainer.style.display = "none";
 
-    // Cria input e botão dinamicamente
     const codigoInput = document.createElement("input");
     codigoInput.type = "text";
     codigoInput.id = "codigo";
@@ -64,14 +61,11 @@ function mostrarCodigoSecreto() {
 function verificarCodigo() {
     const codigo = document.getElementById("codigo").value.trim();
     const mensagem = document.getElementById("mensagem");
-
-    // Remove mensagens antigas
     mensagem.classList.remove("erro", "sucesso");
 
     if (codigo === "777") {
         window.location.href = "pagina_teste.html";
     } else {
-        // Cria balão de erro futurista
         if (!document.getElementById("erro-codigo")) {
             const erroDiv = document.createElement("div");
             erroDiv.id = "erro-codigo";
@@ -89,23 +83,23 @@ function fecharErro() {
     if (erroDiv) erroDiv.style.display = "none";
 }
 
-/* ===== Segunda Página Integrada ===== */
-
+/* ===== Segunda Página ===== */
 window.onload = function() {
     const modal = document.getElementById("aviso");
     if(modal) modal.classList.add("show");
 };
 
-// Fecha o modal e mostra conteúdos com efeitos
+// Fecha o modal e exibe conteúdos
 function fecharAviso() {
     const modal = document.getElementById("aviso");
     const conteudos = document.getElementById("conteudos");
 
-    if(modal) modal.style.display = "none"; // agora desaparece de vez
+    if(modal) modal.style.display = "none";
 
-    if(conteudos) {
+    if(conteudos){
         conteudos.style.display = "block";
         setTimeout(() => conteudos.classList.add("show"), 50);
+        carregarCursosECards(); // carrega links e cards
     }
 
     iniciarConfete();
@@ -151,7 +145,7 @@ function iniciarConfete() {
     window.addEventListener("resize",()=>{canvas.width=window.innerWidth; canvas.height=window.innerHeight;});
 }
 
-/* ===== Partículas leves contínuas ===== */
+/* ===== Partículas ===== */
 function iniciarParticulas() {
     const canvas = document.getElementById("particulas");
     if(!canvas) return;
@@ -196,7 +190,7 @@ const cursosYoutube = [
     { nome: "Curso Python Iniciante", link: "https://youtu.be/S9uPNppGsGo?si=Y6uithvV3mPiP103" },
     { nome: "Curso JavaScript Elogiado", link: "https://youtu.be/Ptbk2af68e8?si=mVqBSJMXldVBlKA9" },
     { nome: "Curso HTML/CSS Avançado", link: "https://youtu.be/pXAGoP2G2vE?si=0PNEO7fekfQWkZ_d" },
-    { nome: "Curso React Avançado", link: "https://youtu.be/n23-oo_93RM?si=LxWWe55r1G7kd1pa" },
+    { nome: "Curso React Avançado", link: "https://youtu.be/n23-oo_93RM?si=LxWWe55r1G7kd1pa" }
 ];
 
 const curiosidades = [
@@ -204,7 +198,9 @@ const curiosidades = [
     "Python é usado em IA, web e ciência de dados.",
     "HTML significa HyperText Markup Language.",
     "React foi criado pelo Facebook em 2013.",
-    "Git é essencial para versionamento de código."
+    "Git é essencial para versionamento de código.",
+    "O primeiro bug de computador registrado foi uma mariposa presa em um relé.",
+    "Existem linguagens de programação que só existem como piadas, como Brainfuck e Whitespace."
 ];
 
 function carregarCursosECards() {
@@ -212,6 +208,7 @@ function carregarCursosECards() {
     const containerCards = document.getElementById("container-cards");
 
     if(listaCursos){
+        listaCursos.innerHTML = "";
         cursosYoutube.forEach(curso => {
             const li = document.createElement("li");
             const a = document.createElement("a");
@@ -224,52 +221,22 @@ function carregarCursosECards() {
     }
 
     if(containerCards){
+        containerCards.innerHTML = "";
         curiosidades.forEach(texto => {
             const card = document.createElement("div");
-            card.className = "card";
-            card.textContent = texto;
+            card.className = "card-curiosidade";
+            card.innerHTML = `<p>${texto}</p>`;
             containerCards.appendChild(card);
+
+            // Animação futurista hover
+            card.addEventListener("mouseover", () => {
+                card.style.transform = "scale(1.05) rotateY(5deg)";
+                card.style.boxShadow = "0 10px 30px rgba(255,0,0,0.6), 0 0 20px rgba(255,50,50,0.3) inset";
+            });
+            card.addEventListener("mouseout", () => {
+                card.style.transform = "scale(1) rotateY(0deg)";
+                card.style.boxShadow = "0 5px 15px rgba(255,0,0,0.4)";
+            });
         });
     }
 }
-
-// chama função ao carregar links
-window.addEventListener("load", carregarCursosECards);
-/* ===== Cards de Curiosidades ===== */
-function criarCards() {
-    const container = document.getElementById("container-cards");
-    if(!container) return;
-
-    const curiosidades = [
-        {titulo: "Curiosidade 1", descricao: "O JavaScript foi criado em apenas 10 dias!"},
-        {titulo: "Curiosidade 2", descricao: "Python é usado por grandes empresas como Google e Instagram."},
-        {titulo: "Curiosidade 3", descricao: "HTML não é uma linguagem de programação, mas de marcação."},
-        {titulo: "Curiosidade 4", descricao: "Git foi criado por Linus Torvalds em 2005."},
-        {titulo: "Curiosidade 5", descricao: "CSS permite animações complexas sem JavaScript."}
-    ];
-
-    curiosidades.forEach(c => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `<h3>${c.titulo}</h3><p>${c.descricao}</p>`;
-        container.appendChild(card);
-
-        // efeito hover interativo
-        card.addEventListener("mouseenter", () => {
-            card.style.transform = "scale(1.05) translateZ(10px)";
-            card.style.boxShadow = "0 15px 40px rgba(255,0,0,0.6), 0 0 20px rgba(255,50,50,0.4) inset";
-        });
-        card.addEventListener("mouseleave", () => {
-            card.style.transform = "scale(1) translateZ(0)";
-            card.style.boxShadow = "0 8px 25px rgba(0,0,0,0.6)";
-        });
-    });
-}
-
-// Chamar a função assim que os conteúdos forem exibidos
-window.addEventListener("load", () => {
-    const conteudos = document.getElementById("conteudos");
-    if(conteudos) {
-        criarCards();
-    }
-});
