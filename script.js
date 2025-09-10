@@ -1,4 +1,4 @@
-/* ===== PRIMEIRA PÁGINA ===== */
+/* ===== Primeira Página ===== */
 function saudar() {
     const nome = document.getElementById("nome").value.trim();
     const mensagem = document.getElementById("mensagem");
@@ -10,6 +10,7 @@ function saudar() {
         mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa página de conteúdos 🚀`;
         mensagem.classList.add("sucesso");
 
+        // SALVA NO LOCALSTORAGE
         localStorage.setItem("nomeUsuario", nome);
 
         idadeContainer.style.display = "block";
@@ -32,6 +33,7 @@ function verificarIdade(maior) {
     } else {
         mensagem.textContent = "Sentimos muito, mas essa página não é pra você ❌";
         mensagem.classList.add("erro");
+        mensagem.style.color = "#ff7f7f";
     }
 }
 
@@ -53,11 +55,15 @@ function mostrarCodigoSecreto() {
     const codigoBtn = document.createElement("button");
     codigoBtn.textContent = "Enviar";
     codigoBtn.className = "btn";
-    codigoBtn.id = "codigo-btn";
     codigoBtn.onclick = verificarCodigo;
 
     container.appendChild(codigoInput);
     container.appendChild(codigoBtn);
+
+    // Ativa Enter
+    codigoInput.addEventListener("keypress", function(e) {
+        if(e.key === "Enter") verificarCodigo();
+    });
 }
 
 function verificarCodigo() {
@@ -85,24 +91,7 @@ function fecharErro() {
     if (erroDiv) erroDiv.style.display = "none";
 }
 
-/* ===== BOTÃO ENTER ===== */
-const nomeInput = document.getElementById("nome");
-if(nomeInput){
-    nomeInput.addEventListener("keypress", function(e){
-        if(e.key === "Enter") saudar();
-    });
-}
-
-document.addEventListener("keypress", function(e){
-    if(e.key === "Enter") {
-        const codigoInput = document.getElementById("codigo");
-        if(codigoInput && document.activeElement === codigoInput) {
-            verificarCodigo();
-        }
-    }
-});
-
-/* ===== SEGUNDA PÁGINA ===== */
+/* ===== Segunda Página ===== */
 window.addEventListener("load", () => {
     const nomeUsuario = localStorage.getItem("nomeUsuario");
     const mensagemBoasVindas = document.getElementById("mensagem-bem-vindo");
@@ -112,21 +101,43 @@ window.addEventListener("load", () => {
     }
 });
 
+// Fecha o modal e exibe conteúdos
 function fecharAviso() {
     const modal = document.getElementById("aviso");
-    const conteudos = document.getElementById("conteudos");
-
     if(modal) modal.style.display = "none";
-    if(conteudos){
-        conteudos.style.display = "block";
-        setTimeout(() => {
-            conteudos.classList.add("show");
-            carregarCursosECards(); // Cria os links e cards
-        }, 50);
-    }
+
+    // Conteúdos
+    const cursosSection = document.createElement("section");
+    cursosSection.className = "cursos";
+    const cursosLista = document.createElement("ul");
+    cursosLista.id = "lista-cursos";
+    cursosSection.appendChild(cursosLista);
+    document.body.appendChild(cursosSection);
+
+    const curiosidadesSection = document.createElement("section");
+    const tituloCards = document.createElement("h2");
+    tituloCards.className = "titulo-cards";
+    tituloCards.textContent = "Curiosidades de Programação";
+    curiosidadesSection.appendChild(tituloCards);
+
+    const containerCards = document.createElement("div");
+    containerCards.id = "container-cards";
+    containerCards.className = "cards";
+    curiosidadesSection.appendChild(containerCards);
+    document.body.appendChild(curiosidadesSection);
+
+    // Footer Instagram
+    const footer = document.createElement("footer");
+    footer.innerHTML = `<p>Para mais informações, me siga no Instagram:</p>
+    <a href="https://www.instagram.com/daniellucass_06" target="_blank" class="btn">Instagram: @daniellucass_06</a>`;
+    document.body.appendChild(footer);
+
+    carregarCursosECards();
+    iniciarConfete();
+    iniciarParticulas();
 }
 
-/* ===== CURSOS E CARDS ===== */
+/* ===== Cursos e Cards ===== */
 function carregarCursosECards() {
     const listaCursos = document.getElementById("lista-cursos");
     const containerCards = document.getElementById("container-cards");
@@ -179,6 +190,7 @@ function carregarCursosECards() {
             containerCards.appendChild(card);
         });
 
+        // Animação fade-in em cascata
         const cards = containerCards.querySelectorAll(".card-curiosidade");
         cards.forEach((card, i) => setTimeout(() => card.classList.add("visible"), i * 150));
     }
