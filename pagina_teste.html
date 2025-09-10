@@ -6,56 +6,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="pagina_teste">
-    <div class="container">
-        <h1 class="animado">Bem-vindo à nossa página!</h1>
 
-        <!-- Modal de aviso -->
-        <div id="aviso" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="fecharAviso()">&times;</span>
-                <p>Bem-vindo! 🎉<br>Essa página foi criada pensando em você!<br>Nosso time escolheu a dedo cada aula e curso para o seu desenvolvimento.</p>
-            </div>
-        </div>
+    <!-- Canvas de partículas e confete -->
+    <canvas id="particulas"></canvas>
+    <canvas id="confete"></canvas>
 
-        <!-- Conteúdos -->
-        <div id="conteudos">
-            <p id="mensagem-bem-vindo"></p>
-
-            <h2 class="titulo-secao">Cursos e aulas de Desenvolvimento</h2>
-            <ul id="lista-cursos"></ul>
-
-            <h2 class="titulo-secao">Curiosidades de Programação</h2>
-            <div id="container-cards" class="cards"></div>
-
-            <div class="instagram">
-                <p>Para mais informações, me siga no Instagram:</p>
-                <a href="https://www.instagram.com/daniellucass_06" target="_blank">@daniellucass_06</a>
-            </div>
+    <!-- Modal -->
+    <div id="aviso" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharAviso()">&times;</span>
+            <p>Bem-vindo! 🎉<br>Essa página foi criada pensando em você!<br>Nosso time escolheu a dedo, cada aula e curso dessa página, para o seu melhor desenvolvimento!</p>
         </div>
     </div>
 
+    <!-- Conteúdo principal -->
+    <header>
+        <h1 class="animado">Bem-vindo à nossa página!</h1>
+        <p id="mensagem-bem-vindo" style="font-size:1.2em; color:#ffcccc; text-shadow:0 0 6px #ff1a1a;"></p>
+    </header>
+
+    <section class="cursos">
+        <h2>Cursos e aulas de Desenvolvimento</h2>
+        <ul id="lista-cursos"></ul>
+    </section>
+
+    <section class="curiosidades">
+        <h2 class="titulo-cards">Curiosidades de Programação</h2>
+        <div id="container-cards" class="cards"></div>
+    </section>
+
+    <footer>
+        <p>Para mais informações, me siga no Instagram:</p>
+        <a href="https://www.instagram.com/daniellucass_06" target="_blank" class="btn">Instagram: @daniellucass_06</a>
+    </footer>
+
     <script src="script.js"></script>
-    <script>
-        // Exibe conteúdos após fechar modal
-        function fecharAviso() {
-            const modal = document.getElementById("aviso");
-            const conteudos = document.getElementById("conteudos");
-
-            if(modal) modal.style.display = "none";
-            if(conteudos) {
-                conteudos.style.display = "block";
-
-                // Mensagem de boas-vindas
-                const nomeUsuario = localStorage.getItem("nomeUsuario");
-                const mensagemBoasVindas = document.getElementById("mensagem-bem-vindo");
-                if(nomeUsuario && mensagemBoasVindas){
-                    mensagemBoasVindas.textContent = `Olá, ${nomeUsuario}! Confira os links abaixo:`;
-                }
-
-                // Carrega cursos e cards
-                carregarCursosECards();
-            }
-        }
-    </script>
 </body>
 </html>
