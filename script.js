@@ -7,8 +7,11 @@ function saudar() {
     mensagem.classList.remove("erro", "sucesso");
 
     if (nome) {
-        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa Página de Conteúdos  🚀`;
+        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa página de conteúdos 🚀`;
         mensagem.classList.add("sucesso");
+
+        // SALVA NO LOCALSTORAGE
+        localStorage.setItem("nomeUsuario", nome);
 
         idadeContainer.style.display = "block";
         idadeContainer.style.opacity = 0;
@@ -43,19 +46,29 @@ function mostrarCodigoSecreto() {
     const idadeContainer = document.getElementById("idade-container");
     idadeContainer.style.display = "none";
 
-    const codigoInput = document.createElement("input");
-    codigoInput.type = "text";
-    codigoInput.id = "codigo";
-    codigoInput.placeholder = "Digite o código de acesso aqui";
-    codigoInput.style.marginTop = "10px";
+    // Evitar duplicar inputs
+    if (!document.getElementById("codigo")) {
+        const codigoInput = document.createElement("input");
+        codigoInput.type = "text";
+        codigoInput.id = "codigo";
+        codigoInput.placeholder = "Digite o código de acesso aqui";
+        codigoInput.style.marginTop = "10px";
 
-    const codigoBtn = document.createElement("button");
-    codigoBtn.textContent = "Enviar";
-    codigoBtn.className = "btn";
-    codigoBtn.onclick = verificarCodigo;
+        const codigoBtn = document.createElement("button");
+        codigoBtn.textContent = "Enviar";
+        codigoBtn.className = "btn";
+        codigoBtn.onclick = verificarCodigo;
 
-    container.appendChild(codigoInput);
-    container.appendChild(codigoBtn);
+        container.appendChild(codigoInput);
+        container.appendChild(codigoBtn);
+
+        // Ativar Enter para input do código secreto
+        codigoInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                verificarCodigo();
+            }
+        });
+    }
 }
 
 function verificarCodigo() {
@@ -81,30 +94,6 @@ function verificarCodigo() {
 function fecharErro() {
     const erroDiv = document.getElementById("erro-codigo");
     if (erroDiv) erroDiv.style.display = "none";
-}
-function saudar() {
-    const nome = document.getElementById("nome").value.trim();
-    const mensagem = document.getElementById("mensagem");
-    const idadeContainer = document.getElementById("idade-container");
-
-    mensagem.classList.remove("erro", "sucesso");
-
-    if (nome) {
-        mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa página de conteúdos 🚀`;
-        mensagem.classList.add("sucesso");
-
-        // SALVA NO LOCALSTORAGE
-        localStorage.setItem("nomeUsuario", nome);
-
-        idadeContainer.style.display = "block";
-        idadeContainer.style.opacity = 0;
-        idadeContainer.style.transition = "opacity 0.5s";
-        setTimeout(() => idadeContainer.style.opacity = 1, 50);
-    } else {
-        mensagem.textContent = "Por favor, digite um nome!";
-        mensagem.classList.add("erro");
-        idadeContainer.style.display = "none";
-    }
 }
 
 /* ===== Segunda Página ===== */
@@ -133,8 +122,8 @@ function fecharAviso() {
         }, 50);
     }
 
-    iniciarConfete();
-    iniciarParticulas();
+    iniciarConfete?.();
+    iniciarParticulas?.();
 }
 
 /* ===== Cursos e Cards ===== */
@@ -195,3 +184,10 @@ function carregarCursosECards() {
         cards.forEach((card, i) => setTimeout(() => card.classList.add("visible"), i * 150));
     }
 }
+
+/* ===== Ativar Enter no input de nome ===== */
+document.getElementById("nome")?.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        saudar();
+    }
+});
