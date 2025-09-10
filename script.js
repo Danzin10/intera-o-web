@@ -1,4 +1,4 @@
-/* ===== Primeira Página ===== */
+/* ===== PRIMEIRA PÁGINA ===== */
 function saudar() {
     const nome = document.getElementById("nome").value.trim();
     const mensagem = document.getElementById("mensagem");
@@ -10,7 +10,6 @@ function saudar() {
         mensagem.textContent = `Olá, ${nome}! Seja bem-vindo(a) à nossa página de conteúdos 🚀`;
         mensagem.classList.add("sucesso");
 
-        // SALVA NO LOCALSTORAGE
         localStorage.setItem("nomeUsuario", nome);
 
         idadeContainer.style.display = "block";
@@ -33,7 +32,6 @@ function verificarIdade(maior) {
     } else {
         mensagem.textContent = "Sentimos muito, mas essa página não é pra você ❌";
         mensagem.classList.add("erro");
-        mensagem.style.color = "#ff7f7f";
     }
 }
 
@@ -46,29 +44,20 @@ function mostrarCodigoSecreto() {
     const idadeContainer = document.getElementById("idade-container");
     idadeContainer.style.display = "none";
 
-    // Evitar duplicar inputs
-    if (!document.getElementById("codigo")) {
-        const codigoInput = document.createElement("input");
-        codigoInput.type = "text";
-        codigoInput.id = "codigo";
-        codigoInput.placeholder = "Digite o código de acesso aqui";
-        codigoInput.style.marginTop = "10px";
+    const codigoInput = document.createElement("input");
+    codigoInput.type = "text";
+    codigoInput.id = "codigo";
+    codigoInput.placeholder = "Digite o código de acesso aqui";
+    codigoInput.style.marginTop = "10px";
 
-        const codigoBtn = document.createElement("button");
-        codigoBtn.textContent = "Enviar";
-        codigoBtn.className = "btn";
-        codigoBtn.onclick = verificarCodigo;
+    const codigoBtn = document.createElement("button");
+    codigoBtn.textContent = "Enviar";
+    codigoBtn.className = "btn";
+    codigoBtn.id = "codigo-btn";
+    codigoBtn.onclick = verificarCodigo;
 
-        container.appendChild(codigoInput);
-        container.appendChild(codigoBtn);
-
-        // Ativar Enter para input do código secreto
-        codigoInput.addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                verificarCodigo();
-            }
-        });
-    }
+    container.appendChild(codigoInput);
+    container.appendChild(codigoBtn);
 }
 
 function verificarCodigo() {
@@ -96,9 +85,25 @@ function fecharErro() {
     if (erroDiv) erroDiv.style.display = "none";
 }
 
-/* ===== Segunda Página ===== */
+/* ===== BOTÃO ENTER ===== */
+const nomeInput = document.getElementById("nome");
+if(nomeInput){
+    nomeInput.addEventListener("keypress", function(e){
+        if(e.key === "Enter") saudar();
+    });
+}
+
+document.addEventListener("keypress", function(e){
+    if(e.key === "Enter") {
+        const codigoInput = document.getElementById("codigo");
+        if(codigoInput && document.activeElement === codigoInput) {
+            verificarCodigo();
+        }
+    }
+});
+
+/* ===== SEGUNDA PÁGINA ===== */
 window.addEventListener("load", () => {
-    // Pega o nome do usuário salvo na primeira página
     const nomeUsuario = localStorage.getItem("nomeUsuario");
     const mensagemBoasVindas = document.getElementById("mensagem-bem-vindo");
 
@@ -107,26 +112,21 @@ window.addEventListener("load", () => {
     }
 });
 
-// Fecha o modal e exibe conteúdos
 function fecharAviso() {
     const modal = document.getElementById("aviso");
     const conteudos = document.getElementById("conteudos");
 
     if(modal) modal.style.display = "none";
-
     if(conteudos){
         conteudos.style.display = "block";
         setTimeout(() => {
             conteudos.classList.add("show");
-            carregarCursosECards(); // cria links e cards
+            carregarCursosECards(); // Cria os links e cards
         }, 50);
     }
-
-    iniciarConfete?.();
-    iniciarParticulas?.();
 }
 
-/* ===== Cursos e Cards ===== */
+/* ===== CURSOS E CARDS ===== */
 function carregarCursosECards() {
     const listaCursos = document.getElementById("lista-cursos");
     const containerCards = document.getElementById("container-cards");
@@ -179,15 +179,7 @@ function carregarCursosECards() {
             containerCards.appendChild(card);
         });
 
-        // Animação fade-in em cascata
         const cards = containerCards.querySelectorAll(".card-curiosidade");
         cards.forEach((card, i) => setTimeout(() => card.classList.add("visible"), i * 150));
     }
 }
-
-/* ===== Ativar Enter no input de nome ===== */
-document.getElementById("nome")?.addEventListener("keydown", function(event){
-    if(event.key === "Enter"){
-        saudar();
-    }
-});
