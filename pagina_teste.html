@@ -5,26 +5,31 @@
     <title>Página de Desenvolvimento</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== Segunda Página - Estilo Formal ===== */
+        /* ===== Segunda Página - Layout Formal e Preenchido ===== */
         body.pagina_teste {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5; /* fundo claro */
-            color: #222; /* texto escuro */
+            color: #222;
             margin: 0;
             padding: 20px;
-            display: flex;
-            justify-content: center;
         }
 
         #conteudos {
             width: 100%;
-            max-width: 900px;
+            max-width: 1200px;
+            margin: 0 auto;
             display: block;
         }
 
-        .mensagem-bem-vindo {
+        #mensagem-bem-vindo {
             font-size: 1.5em;
             margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #222;
         }
 
         ul#lista-cursos {
@@ -76,14 +81,11 @@
             transform: translateY(-2px);
         }
 
-        /* Título seção curiosidades */
         .titulo-cards {
             font-size: 1.4em;
             color: #222;
-            margin-bottom: 15px;
         }
 
-        /* Instagram no final */
         .instagram {
             text-align: center;
             font-size: 1.2em;
@@ -99,16 +101,11 @@
         .instagram a:hover {
             text-decoration: underline;
         }
-
-        /* Remover modal e partículas */
-        #particulas, #confete, .modal {
-            display: none;
-        }
     </style>
 </head>
 <body class="pagina_teste">
-    <div id="conteudos" style="display:none;">
-        <p id="mensagem-bem-vindo" class="mensagem-bem-vindo"></p>
+    <div id="conteudos">
+        <p id="mensagem-bem-vindo"></p>
 
         <h2>Cursos e aulas de Desenvolvimento</h2>
         <ul id="lista-cursos"></ul>
@@ -123,5 +120,20 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Mostra conteúdos automaticamente e preenche links e cards
+        window.addEventListener("load", () => {
+            const conteudos = document.getElementById("conteudos");
+            conteudos.style.display = "block";
+            carregarCursosECards();
+
+            // Mensagem de boas-vindas
+            const nomeUsuario = localStorage.getItem("nomeUsuario");
+            const mensagemBoasVindas = document.getElementById("mensagem-bem-vindo");
+            if(nomeUsuario && mensagemBoasVindas){
+                mensagemBoasVindas.textContent = `Olá, ${nomeUsuario}! Confira os links abaixo:`;
+            }
+        });
+    </script>
 </body>
 </html>
